@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+@* Layout kısmı sayfalarda sabit olan core mantığı ile çalışır *@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Burası Başlık</title>
+</head>
+<body>
+    <div>Burası layout</div>
+    <div> 
+        @RenderBody()
+    </div>
+</body>
+</html>
