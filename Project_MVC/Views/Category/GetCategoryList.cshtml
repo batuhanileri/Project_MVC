@@ -1,0 +1,28 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+@* Razor syntax C# ifadeleri için kullanılır. *@
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>AÇIKLAMA</th>
+        <th>DURUM</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.CategoryId</td>
+    <td>@item.CategoryName</td>
+    <td>@item.CategoryDescription</td>
+    <td>@item.CategoryStatus</td>
+</tr>
+
+    }
+</table>
