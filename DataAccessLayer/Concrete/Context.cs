@@ -10,6 +10,7 @@ namespace DataAccessLayer.Concrete
 {
     public class Context:DbContext
     {
+        //Veritabanı tablolarını oluşturan framework yapısı
         public DbSet<About> Abouts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Contact> Contacts { get; set; }
