@@ -1,0 +1,41 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .gizle {
+        display: none;
+    }
+</style>
+
+<h2>KATEGORİ GÜNCELLEME SAYFASI</h2>
+
+<br />
+@using (Html.BeginForm("UpdateCategory", "AdminCategory", FormMethod.Post))
+{
+<div class="form-group">
+
+    <div class="gizle">
+        @Html.Label("Kategori Id")
+        @Html.TextBoxFor(x => x.CategoryId, new { @class = "form-control" })
+    </div>
+
+    <br />
+    @Html.Label("Kategori Adı")
+    @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.CategoryName)
+
+    <br /> <br />
+    @Html.Label("Kategori Açıklamayı yazınız")
+    @Html.TextAreaFor(x => x.CategoryDescription, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.CategoryDescription)
+
+    <button class="btn btn-info">GüNCELLE</button>
+
+    <br />
+    <br />
+</div>
+
+    }

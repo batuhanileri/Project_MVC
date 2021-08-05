@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICategoryService.cs" />
+    <Compile Include="Abstract\IWriterService.cs" />
     <Compile Include="Concrete\CategoryManager.cs" />
     <Compile Include="FluentValidation\CategoryValidatior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
