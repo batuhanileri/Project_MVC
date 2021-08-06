@@ -17,19 +17,19 @@ namespace BusinessLayer.Concrete
         {
             _writerDal = writerDal;
         }
-        public void CategoryAdd(Writer writer)
+        public void WriterAdd(Writer writer)
         {
             _writerDal.Add(writer);
 
         }
 
-        public void CategoryDelete(Writer writer)
+        public void WriterDelete(Writer writer)
         {
             _writerDal.Delete(writer);
 
         }
 
-        public void CategoryUpdate(Writer writer)
+        public void WriterUpdate(Writer writer)
         {
             _writerDal.Update(writer);
 

@@ -4,44 +4,74 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<style>
+    .gizle {
+       
+        margin-bottom: 10px;
+      
+    }
+    .gizle2 {
+        margin-right: 200px;
+        
+    }
+    .center {
+        margin-left: 0px;
+        margin-right: auto;
+        width: 70%;
+        width:1000px;
+    }
+</style>
+
 <!DOCTYPE html>
 <html>
 
 <body class="hold-transition sidebar-mini">
-   
-        
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>YAZARLAR LİSTESİ</h1>
-                        </div>
-                        
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
 
-            <!-- Main content -->
-            <section class="content">
 
-                <!-- Default box -->
-                <div class="card card-solid">
-                    <div class="card-body pb-0">
-                        <div class="row d-flex align-items-stretch">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <a href="/Writer/AddWriter" class="btn btn-info " style="float: right">Yeni Yazar Ekle</a>
+
+                    <h1>YAZARLAR LİSTESİ</h1>
+
+                </div>
+
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+            <!-- Default box -->
+        <div class="card card-solid">
+          
+
+                <div class="card-body pb-0">
+
+                    <div class="row d-flex align-items-stretch" >
+
                         @foreach (var item in Model)
                         {
+                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                            <div class="center">
 
-
-                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                                 <div class="card bg-light">
                                     @*<div class="card-header text-muted border-bottom-0">
-                                        Digital Strategist
-                                    </div>*@
+                    Digital Strategist
+                </div>*@
+
                                     <div class="card-body pt-0">
+
                                         <div class="row">
                                             <div class="col-7">
-                                                <h2 class="lead"><b>@item.WriterName @item.WriterSurname</b></h2>
+                                                <h2 class="lead" style="margin-top:10px"><b>@item.WriterName @item.WriterSurname</b></h2>
                                                 <p class="text-muted text-sm"><b>Hakkında: </b> @item.WriterAbout </p>
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                     <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Mail: @item.WriterMail</li>
@@ -54,29 +84,46 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="card-footer">
-                                        <div class="text-right">
+
+                                        <div class="text-left; gizle">
                                             <a href="#" class="btn btn-sm bg-teal">
-                                                <i class="fas fa-comments">Yazarın Başlıkları</i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-user"></i> Profili Düzenle
+                                                <div class="text-center" style="width:182px; height:30px; ">
+                                                    <i class="fas fa-comments"></i> Yazarın Başlıkları
+                                                </div>
                                             </a>
                                         </div>
+
+                                        <div class="text-left; gizle">
+                                           
+
+                                            <a href="/Writer/EditWriter/@item.WriterId" class="btn btn-warning" style="width:200px"> <i class="fas fa-user"> </i> Profili Düzenle </a>
+                                                
+                                          
+                                        </div>
+                                        <div class="text-left">
+
+                                         <a href="/Writer/DeleteWriter/@item.WriterId" class="btn btn-danger" style="width:200px"> YAZAR SİL</a>
+
+                                        </div>
                                     </div>
-                                </div>
+
+                                    </div>
                             </div>
-                        }
                         </div>
-                    </div>
-                    <!-- /.card-body -->
-                    
-                    <!-- /.card-footer -->
+                   
+                            
+                            }
+                        </div>
                 </div>
-          
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+            </div>
+     
 
-            </section>
-
+    </section>
 </body>
 </html>
 
