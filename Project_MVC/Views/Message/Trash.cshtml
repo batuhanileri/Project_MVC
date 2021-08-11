@@ -1,9 +1,11 @@
 ﻿@using EntityLayer.Concrete
-@model List<Message>
+
 @{
-    ViewBag.Title = "Inbox";
+    ViewBag.Title = "Trash";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@model List<Message>
+
 
 
 <!DOCTYPE html>
@@ -73,7 +75,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/Message/Trash/" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-trash-alt"></i> Çöp Kutusu
                                 </a>
                             </li>
@@ -120,7 +122,7 @@
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Gelen Mesajlar</h3>
+                        <h3 class="card-title">Çöp Kutusu</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" placeholder="Mail kutusunda ara.">
@@ -172,21 +174,16 @@
                                                 </div>
                                             </td>
                                             <td class="mailbox-star">
-                                                <a href="/Message/GetInboxMessageDetails/@item.MessageId"></a>
-                                                   
-                                                        <a class="btn btn-danger btn-sm" href="/Message/DeleteMessage/@item.MessageId">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Sil
-                
-                                                </a>
+                                                <a href="/Contact/GetContactDetails/@item.MessageId"></a>
+
+                                               
                                             </td>
-                                            <td class="mailbox-name"><a href="/Message/GetInboxMessageDetails/@item.MessageId">@item.SenderMail</a></td>
+                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.MessageId">@item.SenderMail</a></td>
                                             <td class="mailbox-subject">
                                                 <b>@item.Subject</b> -  @item.MessageContent
                                             </td>
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@item.MessageDate</td>
+                                            <td class="mailbox-date">5 mins ago</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -230,4 +227,5 @@
 
 </body>
 </html>
+
 

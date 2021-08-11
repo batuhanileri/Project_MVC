@@ -1,10 +1,4 @@
-﻿@model  EntityLayer.Concrete.Contact
-
-@{
-    ViewBag.Title = "Index";
-   
-}
-
+﻿
 <div class="col-md-3">
     <a href="/Message/NewMessage/" class="btn btn-primary btn-block mb-3">Yeni Mesaj Oluştur</a>
     <div class="card">
@@ -19,10 +13,15 @@
         <div class="card-body p-0">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
+                    <a href="/Contact/Index/" class="nav-link">
+                        <i class="fas fa-mail-bulk"></i> İletişim
+                        <span class="badge bg-primary float-right"></span>
+                    </a>
+                </li>
+                <li class="nav-item active">
                     <a href="/Message/Inbox/" class="nav-link">
                         <i class="fas fa-inbox"></i> Gelen Mesajlar
                         <span class="badge bg-primary float-right"></span>
-
                     </a>
                 </li>
                 <li class="nav-item">
@@ -35,12 +34,7 @@
                         <i class="far fa-file-alt"></i> Taslaklar
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-filter"></i> Spam
-                        <span class="badge bg-warning float-right">65</span>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="/Message/Trash/" class="nav-link">
                         <i class="far fa-trash-alt"></i> Çöp Kutusu

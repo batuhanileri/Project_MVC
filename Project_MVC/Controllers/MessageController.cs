@@ -33,5 +33,27 @@ namespace Project_MVC.Controllers
         {
             return View();
         }
+        public ActionResult DeleteMessage(int id)
+        {
+            var messageValue = mm.GetById(id);
+            messageValue.MessagesStatus = false;
+            mm.MessageDelete(messageValue);            
+            return RedirectToAction("Inbox");
+        }
+        public ActionResult GetInboxMessageDetails(int id)
+        {
+            var Values = mm.GetById(id);
+
+            return View(Values);
+        }
+        public ActionResult Trash()
+        {
+            
+
+            var messages = mm.GetFalseMessage();
+           
+            return View(messages);
+
+        }
     }
 }

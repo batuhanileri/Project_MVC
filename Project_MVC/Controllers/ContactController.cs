@@ -13,6 +13,7 @@ namespace Project_MVC.Controllers
     {
         // GET: Contact
         ContactManager cm = new ContactManager(new EfContactDal());
+        MessageManager mm = new MessageManager(new EfMessageDal());
         ContactValidator cv = new ContactValidator();
         public ActionResult Index()
         {
@@ -25,5 +26,11 @@ namespace Project_MVC.Controllers
 
             return View(contactValues);
         }
+        public PartialViewResult MessageListMenu()
+        {
+            return PartialView();
+        }
+       
     }
+
 }
