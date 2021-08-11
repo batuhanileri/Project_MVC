@@ -33,6 +33,7 @@ namespace BusinessLayer.Concrete
 
         public void MessageAdd(Message message)
         {
+            message.MessagesStatus = true;
             _messageDal.Add(message);
 
         }
@@ -53,7 +54,7 @@ namespace BusinessLayer.Concrete
         public List<Message> GetList()
         {
            
-            return _messageDal.GetAll();
+            return _messageDal.GetAll(x=>x.MessagesStatus==true);
         }
 
         public List<Message> GetFalseMessage()

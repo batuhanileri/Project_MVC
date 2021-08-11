@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.FluentValidation;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace Project_MVC.Controllers
     {
         // GET: Message
         MessageManager mm = new MessageManager(new EfMessageDal());
+        MessageValidator messageValidator = new MessageValidator();
+
         public ActionResult Inbox()
         {
             var messageList = mm.GetListInbox();
@@ -31,6 +35,24 @@ namespace Project_MVC.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message message)
         {
+            ValidationResult results = messageValidator.Validate(message);
+            if (results.IsValid)
+            {
+                message.MessageDate =DateTime.Parse( DateTime.Now.ToShortDateString());
+              
+
+
+                mm.MessageAdd(message);
+                return RedirectToAction("Sendbox");
+
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
             return View();
         }
         public ActionResult DeleteMessage(int id)
@@ -41,6 +63,12 @@ namespace Project_MVC.Controllers
             return RedirectToAction("Inbox");
         }
         public ActionResult GetInboxMessageDetails(int id)
+        {
+            var Values = mm.GetById(id);
+
+            return View(Values);
+        }
+        public ActionResult GetSendboxMessageDetails(int id)
         {
             var Values = mm.GetById(id);
 

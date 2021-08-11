@@ -65,12 +65,7 @@
                                     <i class="far fa-file-alt"></i> Taslaklar
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-filter"></i> Spam
-                                    <span class="badge bg-warning float-right">65</span>
-                                </a>
-                            </li>
+                           
                             <li class="nav-item">
                                 <a href="/Message/Trash/" class="nav-link">
                                     <i class="far fa-trash-alt"></i> Çöp Kutusu
@@ -170,10 +165,10 @@
                                                     <label for="check1"></label>
                                                 </div>
                                             </td>
-                                            <td class="mailbox-star"><a href="/Contact/GetContactDetails/@item.MessageId"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.MessageId">@item.ReceiverMail</a></td>
+                                            <td class="mailbox-star"><a href="/Message/GetSendboxMessageDetails/@item.MessageId"><i class="fas fa-star text-warning"></i></a></td>
+                                            <td class="mailbox-name"><a href="/Message/GetSendboxMessageDetails/@item.MessageId">@item.ReceiverMail</a></td>
                                             <td class="mailbox-subject">
-                                                <b>@item.Subject</b> @item.MessageContent.Substring(0, 25)
+                                                <b>@item.Subject</b> @item.MessageContent
                                             </td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">@item.MessageDate</td>
