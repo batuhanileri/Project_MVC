@@ -68,21 +68,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\About.cs" />
+    <Compile Include="Concrete\AdminRole.cs" />
     <Compile Include="Concrete\Category.cs" />
-    <Compile Include="Concrete\Admin.cs" />
+    <Compile Include="Concrete\Manager.cs" />
     <Compile Include="Concrete\Contact.cs" />
     <Compile Include="Concrete\Content.cs" />
     <Compile Include="Concrete\Heading.cs" />
     <Compile Include="Concrete\ImageFile.cs" />
     <Compile Include="Concrete\Message.cs" />
-    <Compile Include="Concrete\SignUp.cs" />
+    <Compile Include="Concrete\User.cs" />
     <Compile Include="Concrete\Writer.cs" />
+    <Compile Include="EDto\AdminForLoginDto.cs" />
+    <Compile Include="EDto\AdminForRegisterDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

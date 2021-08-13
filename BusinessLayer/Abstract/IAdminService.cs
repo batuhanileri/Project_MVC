@@ -1,25 +1,20 @@
 ﻿using EntityLayer.Concrete;
-using EntityLayer.Dto;
+using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
     public interface IAdminService
     {
-        List<Admin> GetList();
+        List<Manager> GetList();
         bool Login(AdminForLoginDto admin);
         void AdminAdd(AdminForRegisterDto adminregister, string password);
-        Admin GetById(int id);
-        Admin GetByName(String name);
-        Admin GetByMail(String mail);
+        Manager GetById(int id);
+        Manager GetByName(String name);
+        Manager GetByMail(String mail);
         void ChangeRole(int id, String role);
-        void AdminDelete(Admin admin);
-        void AdminUpdate(Admin admin);
-
-
+        void AdminDelete(Manager admin);
+        void AdminUpdate(Manager admin);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using EntityLayer.Concrete;
+using System.Collections.Generic;
 
 namespace BusinessLayer.Abstract
 {

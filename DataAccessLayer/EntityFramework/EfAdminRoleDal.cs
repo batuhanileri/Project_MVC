@@ -4,9 +4,7 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfAdminRoleDal : GenericRepository<Admin>, IAdminDal
+    public class EfAdminRoleDal : GenericRepository<AdminRole>, IAdminRoleDal
     {
-
-
     }
 }

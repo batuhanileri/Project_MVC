@@ -50,6 +50,11 @@ namespace DataAccessLayer.Concrete.Repositories
             return _object.ToList();
         }
 
+        public List<T> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(T t)
         {
 

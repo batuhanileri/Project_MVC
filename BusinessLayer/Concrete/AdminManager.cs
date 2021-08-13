@@ -1,7 +1,8 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Hashing;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
-using EntityLayer.Dto;
+using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BusinessLayer.Concrete
             byte[] passwordHash, passwordSalt, mailHash, mailSalt;
             HashingHelper.CreateMailHash(adminregister.Mail, out mailHash, out mailSalt);
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var admin = new Admin
+            var admin = new Manager
             {
                 Role = adminregister.AdminRole,
                 PasswordHash = passwordHash,
@@ -38,12 +39,12 @@ namespace BusinessLayer.Concrete
             _adminDal.Add(admin);
         }
 
-        public void AdminDelete(Admin admin)
+        public void AdminDelete(Manager admin)
         {
             _adminDal.Delete(admin);
         }
 
-        public void AdminUpdate(Admin admin)
+        public void AdminUpdate(Manager admin)
         {
             //byte[] passwordHash, passwordSalt, mailHash, mailSalt;
             //HashingHelper.CreateMailHash(adminregister.Mail, out mailHash, out mailSalt);
@@ -62,7 +63,7 @@ namespace BusinessLayer.Concrete
             _adminDal.Update(admin);
         }
 
-        public Admin GetById(int id)
+        public Manager GetById(int id)
         {
             return _adminDal.Get(x => x.Id == id);
         }
@@ -85,7 +86,7 @@ namespace BusinessLayer.Concrete
             byte[] passwordHash, passwordSalt, mailHash, mailSalt;
             HashingHelper.CreateMailHash(adminregister.Mail, out mailHash, out mailSalt);
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var admin = new Admin
+            var admin = new Manager
             {
                 Role = adminregister.AdminRole,
                 PasswordHash = passwordHash,
@@ -100,16 +101,16 @@ namespace BusinessLayer.Concrete
             _adminDal.Add(admin);
             return true;
         }
-        public List<Admin> GetList()
+        public List<Manager> GetList()
         {
             return _adminDal.GetAll(x => x.Status == true);
         }
 
-        public Admin GetByName(String name)
+        public Manager GetByName(String name)
         {
             return _adminDal.Get(x => x.UserName == name);
         }
-        public Admin GetByMail(String mail)
+        public Manager GetByMail(String mail)
         {
             return _adminDal.Get(x => x.Mail == mail);
         }
