@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public List<AdminRole> GetList()
         {
-            return _adminRoleDal.List();
+            return _adminRoleDal.GetAll();
         }
     }
 }

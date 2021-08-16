@@ -96,6 +96,10 @@
     <Compile Include="Migrations\202108130955576_manager.designer.cs">
       <DependentUpon>202108130955576_manager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108131139256_add_writerhash.cs" />
+    <Compile Include="Migrations\202108131139256_add_writerhash.designer.cs">
+      <DependentUpon>202108131139256_add_writerhash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202108130955576_manager.resx">
       <DependentUpon>202108130955576_manager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108131139256_add_writerhash.resx">
+      <DependentUpon>202108131139256_add_writerhash.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

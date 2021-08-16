@@ -9,22 +9,22 @@ using System.Web.Mvc;
 
 namespace Project_MVC.Controllers
 {
-    [AllowAnonymous]
-    public class HeadingController : Controller
+    public class WriterPanelController : Controller
     {
-        // GET: Heading
-        HeadingManager hm = new HeadingManager(new EfHeadingDal());
+        // GET: WriterPanel
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
-        WriterManager wm = new WriterManager(new EfWriterDal());
-    
-
-        public ActionResult Index()
+        HeadingManager hm = new HeadingManager(new EfHeadingDal());
+        public ActionResult WriterProfile()
         {
-            var headingvalues = hm.GetList();
-            return View(headingvalues);
+            return View();
+        }
+        public ActionResult MyHeading()
+        {
+            var values = hm.GetListByWriter();
+            return View(values);
         }
         [HttpGet]
-        public ActionResult AddHeading()
+        public ActionResult NewHeading()
         {
             List<SelectListItem> valueCategory = (from x in cm.GetList()
                                                   select new SelectListItem
@@ -34,23 +34,18 @@ namespace Project_MVC.Controllers
                                                   }
                                                  ).ToList();
             ViewBag.vlc = valueCategory;
-            List<SelectListItem> valueWriter = (from x in wm.GetList()
-                                                  select new SelectListItem
-                                                  {
-                                                      Text = x.WriterName + " " +x.WriterSurname ,
-                                                      Value = x.WriterId.ToString()
-                                                  }
-                                                ).ToList();
-            ViewBag.vlc1 = valueWriter;
+            
             return View();
         }
         [HttpPost]
-        public ActionResult AddHeading(Heading heading)
+        public ActionResult NewHeading(Heading heading)
         {
-            heading.HeadingDate = DateTime.Parse( DateTime.Now.ToShortDateString());
-                hm.HeadingAdd(heading);
-                return RedirectToAction("Index");
-            }
+            heading.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            heading.WriterId = 4;
+            heading.HeadingStatus = true;
+            hm.HeadingAdd(heading);
+            return RedirectToAction("MyHeading");
+        }
         [HttpGet]
         public ActionResult EditHeading(int id)
         {
@@ -70,14 +65,14 @@ namespace Project_MVC.Controllers
         {
             heading.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             hm.HeadingUpdate(heading);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
         public ActionResult DeleteHeading(int id)
         {
             var headingValue = hm.GetById(id);
-            headingValue.HeadingStatus = false;
+           // headingValue.HeadingStatus = false;
             hm.HeadingDeleteStatus(headingValue);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
     }
 }

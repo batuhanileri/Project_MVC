@@ -24,11 +24,11 @@ namespace BusinessLayer.Concrete
 
         public List<Message> GetListInbox()
         {
-            return _messageDal.GetAll(x=>x.ReceiverMail=="admin@gmail.com" && x.MessagesStatus==true);
+            return _messageDal.GetAll(x=>x.ReceiverMail=="luka@gmail.com" && x.MessagesStatus==true);
         }
         public List<Message> GetListSendbox()
         {
-            return _messageDal.GetAll(x => x.SenderMail == "admin@gmail.com");
+            return _messageDal.GetAll(x => x.SenderMail == "luka@gmail.com");
         }
 
         public void MessageAdd(Message message)

@@ -26,6 +26,11 @@ namespace BusinessLayer.Concrete
             return _headingDal.GetAll();
         }
 
+        public List<Heading> GetListByWriter()
+        {
+            return _headingDal.GetAll(x => x.WriterId == 4);
+        }
+
         public void HeadingAdd(Heading heading)
         {
             _headingDal.Add(heading);
@@ -36,6 +41,11 @@ namespace BusinessLayer.Concrete
         {
             
             _headingDal.Update(heading);
+        }
+
+        public void HeadingDeleteStatus(Heading heading)
+        {
+            _headingDal.Delete(heading);
         }
 
         public void HeadingUpdate(Heading heading)

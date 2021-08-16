@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public List<User> GetList()
         {
-            return _userDal.List();
+            return _userDal.GetAll();
         }
     }
 }

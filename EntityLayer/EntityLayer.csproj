@@ -80,6 +80,8 @@
     <Compile Include="Concrete\Writer.cs" />
     <Compile Include="EDto\AdminForLoginDto.cs" />
     <Compile Include="EDto\AdminForRegisterDto.cs" />
+    <Compile Include="EDto\WriterForLoginDto.cs" />
+    <Compile Include="EDto\WriterForRegisterDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

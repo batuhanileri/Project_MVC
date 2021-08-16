@@ -18,7 +18,7 @@ namespace BusinessLayer.FluentValidation
             RuleFor(x => x.WriterName).MinimumLength(3).WithMessage("En az 3 karakter giriniz.");
             RuleFor(x => x.WriterSurname).MinimumLength(3).WithMessage("En az 3 karakter giriniz.");
             RuleFor(x => x.WriterMail).EmailAddress().WithMessage("Geçerli bir e-mail giriniz");
-            RuleFor(x => x.WriterPassword).NotEmpty().WithMessage("Parola alanı boş geçilemez!").Must(IsPasswordValid).WithMessage("Parolanız en az sekiz karakter, en az bir harf ve bir sayı içermelidir!");
+            //RuleFor(x => x.PasswordSalt).NotEmpty().WithMessage("Parola alanı boş geçilemez!").Must(IsPasswordValid).WithMessage("Parolanız en az sekiz karakter, en az bir harf ve bir sayı içermelidir!");
 
         }
         private bool IsPasswordValid(string arg)

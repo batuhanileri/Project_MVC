@@ -134,7 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AdminCategoryController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -142,13 +142,19 @@
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HeadingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WriterController.cs" />
+    <Compile Include="Controllers\WriterPanelContentController.cs" />
+    <Compile Include="Controllers\WriterPanelController.cs" />
+    <Compile Include="Controllers\WriterPanelMessageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles\AdminRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLTE-3.0.4\.gitignore" />
@@ -2530,6 +2536,24 @@
     <Content Include="Views\ErrorPage\Page404.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Logins\Index.cshtml" />
+    <Content Include="Views\Logins\WriterLogin.cshtml" />
+    <Content Include="Views\Register\WriterRegister.cshtml" />
+    <Content Include="Views\Authorizations\Index.cshtml" />
+    <Content Include="Views\Authorizations\NewAdmin.cshtml" />
+    <Content Include="Views\Authorizations\ChangeRole.cshtml" />
+    <Content Include="Views\Shared\_WriterLayout.cshtml" />
+    <Content Include="Views\WriterPanel\WriterProfile.cshtml" />
+    <Content Include="Views\WriterPanel\MyHeading.cshtml" />
+    <Content Include="Views\WriterPanel\NewHeading.cshtml" />
+    <Content Include="Views\WriterPanel\EditHeading.cshtml" />
+    <Content Include="Views\WriterPanelMessage\Inbox.cshtml" />
+    <Content Include="Views\WriterPanelMessage\MessageListMenu.cshtml" />
+    <Content Include="Views\WriterPanelMessage\Sendbox.cshtml" />
+    <Content Include="Views\WriterPanelMessage\GetInboxMessageDetails.cshtml" />
+    <Content Include="Views\WriterPanelMessage\GetSendboxMessageDetails.cshtml" />
+    <Content Include="Views\WriterPanelMessage\NewMessage.cshtml" />
+    <Content Include="Views\WriterPanelContent\MyContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,8 @@ namespace Project_MVC.Controllers
     public class AdminCategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
+
+        
         public ActionResult Index()
         {
             var categoryvalues = cm.GetList();
@@ -27,7 +29,7 @@ namespace Project_MVC.Controllers
         }
         [HttpPost]
         public ActionResult AddCategory(Category category)
-        {
+        { 
             CategoryValidator validationRules = new CategoryValidator();
             ValidationResult results = validationRules.Validate(category);
             if(results.IsValid)

@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Hashing;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,39 @@ namespace BusinessLayer.Concrete
         {
             return _writerDal.GetAll();
        
+        }
+
+        public bool Login(WriterForLoginDto writer)
+        {
+            var userToCheck = _writerDal.Get(x => x.WriterMail == writer.Email);
+            if (userToCheck == null)
+            {
+                return false;
+            }
+            if (!HashingHelper.VerifyPasswordHash(writer.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+            {
+                return false;
+            }
+            return true;
+        }
+        public void Register(WriterForRegisterDto writer, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var newwriter = new Writer
+            {
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                WriterImage = writer.WriterImage,
+                WriterName = writer.WriterName,
+                WriterSurname = writer.WriterSurname,
+                WriterMail = writer.Mail,
+                WriterStatus = true,
+                WriterAbout = writer.WriterAbout,
+                WriterTitle = writer.WriterTitle,
+
+            };
+            _writerDal.Add(newwriter);
         }
     }
 }
