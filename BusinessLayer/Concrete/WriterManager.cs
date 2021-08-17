@@ -46,7 +46,7 @@ namespace BusinessLayer.Concrete
         public List<Writer> GetList()
         {
             return _writerDal.GetAll();
-       
+
         }
 
         public bool Login(WriterForLoginDto writer)
@@ -80,6 +80,11 @@ namespace BusinessLayer.Concrete
 
             };
             _writerDal.Add(newwriter);
+        }
+
+        public Writer GetByMail(string mail)
+        {
+            return _writerDal.Get(x => x.WriterMail == mail);
         }
     }
 }

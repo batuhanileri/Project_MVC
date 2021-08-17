@@ -2,6 +2,7 @@
 using BusinessLayer.FluentValidation;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using EntityLayer.EDto;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,27 @@ namespace Project_MVC.Controllers
         // GET: Message
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator messageValidator = new MessageValidator();
-
+        
         public ActionResult Inbox()
         {
-            var messageList = mm.GetListInbox();
-            return View(messageList);
+            
+
+            string p = (string)Session["EMail"];            
+            var value = mm.GetListInbox(p);
+            var count = mm.GetListStatusFalse().Count();
+            ViewBag.d1 = count;
+            return View(value);
+            //var value = mm.GetList();
+            //var count = mm.GetListStatusFalse().Count();
+            //ViewBag.d1 = count;
+            //return View(value);
         }
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetListSendbox();
-            return View(messageList);
+            string p = (string)Session["EMail"];
+            var value = mm.GetListSendInbox(p);
+            return View(value);
+            
         }
         [HttpGet]
         public ActionResult NewMessage()
@@ -35,25 +47,14 @@ namespace Project_MVC.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message message)
         {
-            ValidationResult results = messageValidator.Validate(message);
-            if (results.IsValid)
-            {
-                message.MessageDate =DateTime.Parse( DateTime.Now.ToShortDateString());
-              
-
-
-                mm.MessageAdd(message);
-                return RedirectToAction("Sendbox");
-
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            //message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            //mm.MessageAdd(message);
+            //return View("Sendbox");
+            string p = (string)Session["EMail"];
+            message.SenderMail = p;
+            message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            mm.MessageAdd(message);
+            return RedirectToAction("Sendbox");
         }
         public ActionResult DeleteMessage(int id)
         {
@@ -64,12 +65,14 @@ namespace Project_MVC.Controllers
         }
         public ActionResult GetInboxMessageDetails(int id)
         {
-            var Values = mm.GetById(id);
-
-            return View(Values);
+            var value = mm.GetById(id);
+            value.MessagesStatus = true;
+            mm.MessageUpdate(value);
+            return View(value);
         }
         public ActionResult GetSendboxMessageDetails(int id)
         {
+          
             var Values = mm.GetById(id);
 
             return View(Values);

@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace Project_MVC.Controllers
 {
+    [AllowAnonymous]
     public class LoginsController : Controller
     {
         // GET: Logins
@@ -28,7 +29,7 @@ namespace Project_MVC.Controllers
             if ((adm.Login(admin)))
             {
                 FormsAuthentication.SetAuthCookie(admin.Email, false);
-                Session["Mail"] = admin.Email.ToString();
+                Session["EMail"] = admin.Email.ToString(); 
                 return RedirectToAction("Index", "AdminCategory");
             }
             else
@@ -48,7 +49,7 @@ namespace Project_MVC.Controllers
             if ((wm.Login(writer)))
             {
                 FormsAuthentication.SetAuthCookie(writer.Email, false);
-                Session["WriterMail"] = writer.Email.ToString();
+                Session["Writermail"] = writer.Email.ToString();
                 return RedirectToAction("MyContent", "WriterPanelContent");
             }
             else
@@ -62,6 +63,12 @@ namespace Project_MVC.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Index");
+        }
+        public ActionResult LogWriterOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("WriterLogin");
         }
     }
 }

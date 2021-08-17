@@ -23,8 +23,11 @@ namespace Project_MVC.Controllers
         }
         public ActionResult Inbox()
         {
-            var messageList = mm.GetListInbox();
-            return View(messageList);
+            string p = (string)Session["Writermail"];
+            var value = mm.GetListInbox(p);
+            var count = mm.GetListStatusFalse().Count();
+            ViewBag.d1 = count;
+            return View(value);
         }
         public PartialViewResult MessageListMenu()
         {
@@ -32,14 +35,16 @@ namespace Project_MVC.Controllers
         }
         public ActionResult Sendbox()
         {
-            var messageList = mm.GetListSendbox();
-            return View(messageList);
+            string p = (string)Session["Writermail"];
+            var value = mm.GetListSendInbox(p);
+            return View(value);
         }
         public ActionResult GetInboxMessageDetails(int id)
         {
-            var Values = mm.GetById(id);
-
-            return View(Values);
+            var value = mm.GetById(id);
+            value.MessagesStatus = true;
+            mm.MessageUpdate(value);
+            return View(value);
         }
         public ActionResult GetSendboxMessageDetails(int id)
         {
@@ -55,23 +60,11 @@ namespace Project_MVC.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message message)
         {
-            ValidationResult results = messageValidator.Validate(message);
-            if (results.IsValid)
-            {
-                message.SenderMail = "luka@gmail.com";
-                message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                mm.MessageAdd(message);
-                return RedirectToAction("Sendbox");
-
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            string p = (string)Session["Writermail"];
+            message.SenderMail = p;
+            message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            mm.MessageAdd(message);
+            return RedirectToAction("Sendbox");
         }
     }
 }

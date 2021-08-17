@@ -17,5 +17,6 @@ namespace BusinessLayer.Abstract
         void WriterUpdate(Writer writer);
         bool Login(WriterForLoginDto writer);
         void Register(WriterForRegisterDto writer, string password);
+        Writer GetByMail(string mail);
     }
 }

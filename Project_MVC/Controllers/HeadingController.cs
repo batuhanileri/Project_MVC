@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Project_MVC.Controllers
 {
-    [AllowAnonymous]
+   
     public class HeadingController : Controller
     {
         // GET: Heading
@@ -21,6 +21,11 @@ namespace Project_MVC.Controllers
         public ActionResult Index()
         {
             var headingvalues = hm.GetList();
+            return View(headingvalues);
+        }
+        public ActionResult HeadingById(int id)
+        {
+            var headingvalues = hm.GetById(id);
             return View(headingvalues);
         }
         [HttpGet]

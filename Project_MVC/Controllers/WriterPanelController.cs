@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Project_MVC.Controllers
 {
@@ -14,6 +15,8 @@ namespace Project_MVC.Controllers
         // GET: WriterPanel
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
+        int writerid;
         public ActionResult WriterProfile()
         {
             return View();
@@ -40,8 +43,10 @@ namespace Project_MVC.Controllers
         [HttpPost]
         public ActionResult NewHeading(Heading heading)
         {
+            string a = (string)Session["WriterMail"];
             heading.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            heading.WriterId = 4;
+            writerid = wm.GetByMail(a).WriterId;
+            heading.WriterId = writerid;
             heading.HeadingStatus = true;
             hm.HeadingAdd(heading);
             return RedirectToAction("MyHeading");
@@ -74,5 +79,6 @@ namespace Project_MVC.Controllers
             hm.HeadingDeleteStatus(headingValue);
             return RedirectToAction("MyHeading");
         }
+       
     }
 }

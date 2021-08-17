@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
+@{
+    string color = "";
+    string read = "";
+}
 <!DOCTYPE html>
 <html>
 
@@ -66,7 +69,7 @@
                                     <i class="far fa-file-alt"></i> Taslaklar
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a href="/Message/Trash/" class="nav-link">
                                     <i class="far fa-trash-alt"></i> Çöp Kutusu
@@ -115,7 +118,7 @@
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Gelen Mesajlar</h3>
+                        <h3 class="card-title">Gelen Mesajlar  <mark>Okunmamış Mesajlar: @ViewBag.d1</mark></h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" placeholder="Mail kutusunda ara.">
@@ -157,8 +160,16 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-
-
+                                        if (item.MessagesStatus == false)
+                                        {
+                                            color = "danger";
+                                            read = "Okunmadı";
+                                        }
+                                        if (item.MessagesStatus == true)
+                                        {
+                                            color = "primary";
+                                            read = "Okundu";
+                                        }
                                         <tr>
                                             <td>
                                                 <div class="icheck-primary">
@@ -166,22 +177,20 @@
                                                     <label for="check1"></label>
                                                 </div>
                                             </td>
-                                            <td class="mailbox-star">
-                                                <a href="/Message/GetInboxMessageDetails/@item.MessageId"></a>
-                                                   
-                                                        <a class="btn btn-danger btn-sm" href="/Message/DeleteMessage/@item.MessageId">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Sil
-                
-                                                </a>
-                                            </td>
+                                            <td class="mailbox-star"><a href="/Message/GetInboxMessageDetails/@item.MessageId"><i class="fas fa-star text-warning"></i></a></td>
                                             <td class="mailbox-name"><a href="/Message/GetInboxMessageDetails/@item.MessageId">@item.SenderMail</a></td>
                                             <td class="mailbox-subject">
-                                                <b>@item.Subject</b> -  @item.MessageContent
+                                                <b>@item.Subject</b> @item.MessageContent
                                             </td>
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@item.MessageDate</td>
+                                            <td class="mailbox-date"> @(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+
+                                            <td>
+                                                <a class="btn btn-@color btn-sm">
+
+                                                    @read
+                                                </a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

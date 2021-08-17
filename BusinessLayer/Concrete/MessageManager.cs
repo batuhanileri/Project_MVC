@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +17,35 @@ namespace BusinessLayer.Concrete
         {
             _messageDal = messageDal;
         }
+
+        
+
         public Message GetById(int id)
         {
             return _messageDal.Get(x => x.MessageId == id);
 
         }
 
-        public List<Message> GetListInbox()
+        public List<Message> GetListInbox(string p)
         {
-            return _messageDal.GetAll(x=>x.ReceiverMail=="luka@gmail.com" && x.MessagesStatus==true);
+            
+            return _messageDal.GetAll(x=>x.ReceiverMail==p);
         }
-        public List<Message> GetListSendbox()
+        public List<Message> GetListSendInbox(string p)
         {
-            return _messageDal.GetAll(x => x.SenderMail == "luka@gmail.com");
+
+            return _messageDal.GetAll(x => x.SenderMail == p );
         }
+        public List<Message> GetListStatusFalse()
+        {
+            return _messageDal.GetAll(x => x.MessagesStatus == false);
+        }
+
+        public List<Message> GetListStatusTrue()
+        {
+            return _messageDal.GetAll(x => x.MessagesStatus == true);
+        }
+
 
         public void MessageAdd(Message message)
         {
@@ -54,7 +70,7 @@ namespace BusinessLayer.Concrete
         public List<Message> GetList()
         {
            
-            return _messageDal.GetAll(x=>x.MessagesStatus==true);
+            return _messageDal.GetAll(x=>x.MessagesStatus==true );
         }
 
         public List<Message> GetFalseMessage()

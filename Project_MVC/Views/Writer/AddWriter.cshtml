@@ -1,4 +1,4 @@
-﻿@model EntityLayer.Concrete.Writer
+﻿@model EntityLayer.EDto.WriterForRegisterDto
 @{
     ViewBag.Title = "AddWriter";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -18,16 +18,16 @@
     @Html.ValidationMessageFor(x => x.WriterSurname)
     <br />
     @Html.Label("Yazar Mail")
-    @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.WriterMail)
+    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Mail)
     <br />
     @Html.Label("Yazar Şifre")
-    @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.WriterPassword)
+    @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Password)
     <br />
     @Html.Label("Yazar Telefon")
-    @Html.TextBoxFor(x => x.WriterTelephones, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.WriterTelephones)
+    @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.WriterImage)
     <br />
     @Html.Label("Yazar Hakkında")
     @Html.TextBoxFor(x => x.WriterAbout, new { @class = "form-control" })
