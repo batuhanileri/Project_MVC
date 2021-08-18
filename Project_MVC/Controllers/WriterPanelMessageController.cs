@@ -64,7 +64,7 @@ namespace Project_MVC.Controllers
             message.SenderMail = p;
             message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             mm.MessageAdd(message);
-            return RedirectToAction("Sendbox");
+            return View();
         }
     }
 }

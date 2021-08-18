@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.FluentValidation;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,32 @@ namespace Project_MVC.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
+        WriterValidator wv = new WriterValidator();
         int writerid;
+        [HttpGet]
         public ActionResult WriterProfile()
         {
+            string p = (string)Session["WriterMail"];
+            writerid = wm.GetByMail(p).WriterId;
+            var value = wm.GetById(writerid);
+            return View(value);
+        }
+        [HttpPost]
+        public ActionResult WriterProfile(Writer writer)
+        {
+            ValidationResult results = wv.Validate(writer);
+            if (results.IsValid)
+            {
+                wm.WriterUpdate(writer);
+                return RedirectToAction("AllHeading", "WriterPanel");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
             return View();
         }
         public ActionResult MyHeading(string p)
