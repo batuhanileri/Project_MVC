@@ -1,4 +1,6 @@
-﻿
+﻿@using EntityLayer.Concrete
+@model List<Heading>
+
 @{
     Layout = null;
 }
@@ -51,7 +53,7 @@ to get the desired effect
                         <img src="~/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">BATUHAN İLERİ</a>
+                        <a href="#" class="d-block">BAŞLIKLAR</a>
                     </div>
                 </div>
 
@@ -59,73 +61,22 @@ to get the desired effect
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
+
+                        @foreach (var item in Model)
+                        {
+
 
                         <li class="nav-item">
-                            <a href="~/AdminCategory/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <a href="/Default/Headings/@item.HeadingId" class="nav-link">
                                 <p>
-
-                                    Profilim
-
-                                </p>
-                            </a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a href="/WriterPanel/MyHeading/" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    BAŞLIKLARIM
+                                   @item.HeadingName
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/WriterPanel/MyHeading/" class="nav-link">
-                                <i class="nav-icon fas fa-list-alt"></i>
-                                <p>
-                                    TÜM BAŞLIKLAR
-                                </p>
-                            </a>
-                        </li>
+                        }
 
-                        <li class="nav-item has-treeview">
-                            <a href="/WriterPanelMessage/Sendbox/" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    MESAJLAR
-                                </p>
-                            </a>
 
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="/WriterPanelContent/MyContent" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
-                                <p>
-                                    YAZILARIM
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    SİTEYE GİT
-                                </p>
-                            </a>
-
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/Logins/LogWriterOut" class="nav-link">
-                                <i class="nav-icon far fa-plus-square"></i>
-                                <p>
-                                    ÇIKIŞ YAP
-                                </p>
-                            </a>
-
-                        </li>
 
                     </ul>
                 </nav>
@@ -139,8 +90,9 @@ to get the desired effect
             <!-- Content Header (Page header) -->
             <!-- /.content-header -->
             <!-- Main content -->
+            @Html.Action("Index","Default")
             <div class="content">
-                @RenderBody()
+                @*@RenderBody()*@
 
                 <!-- /.container-fluid -->
             </div>
@@ -165,4 +117,5 @@ to get the desired effect
     <script src="~/AdminLTE-3.0.4/dist/js/pages/dashboard3.js"></script>
 </body>
 </html>
+
 

@@ -21,10 +21,12 @@ namespace Project_MVC.Controllers
         {
             return View();
         }
-        public ActionResult MyHeading()
+        public ActionResult MyHeading(string p)
         {
-            var values = hm.GetListByWriter();
-            return View(values);
+            p = (string)Session["Writermail"];
+            writerid = wm.GetByMail(p).WriterId;
+            var value = hm.GetListByWriter(writerid);
+            return View(value);
         }
         [HttpGet]
         public ActionResult NewHeading()
@@ -79,6 +81,10 @@ namespace Project_MVC.Controllers
             hm.HeadingDeleteStatus(headingValue);
             return RedirectToAction("MyHeading");
         }
-       
+        public ActionResult AllHeading()
+        {
+            var headings = hm.GetList();
+            return View(headings);
+        }
     }
 }
