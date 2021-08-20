@@ -19,5 +19,7 @@ namespace EntityLayer.Concrete
         public byte[] AdminUserNameHash { get; set; }
         public String Role { get; set; }
         public bool Status { get; set; }
+       
+
     }
 }

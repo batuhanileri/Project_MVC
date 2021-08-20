@@ -34,6 +34,7 @@
                         <p class="text-center">Giriş Bilgilerinizi Giriniz.</p>
                         @using (Html.BeginForm("Index", "Logins", FormMethod.Post))
                         {
+
                             <div class="form-group">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
                                 <input type="text" name="Email" class="form-control" placeholder="Email" required>
@@ -43,14 +44,16 @@
                                 <input type="password" name="Password" class="form-control" placeholder="Şifre" required>
                             </div>
                             @*<div class="form-group d-md-flex">
-                                <div class="w-100 text-md-right">
-                                    <a href="#">Forgot Password</a>
-                                </div>
-                            </div>*@
+                <div class="w-100 text-md-right">
+                    <a href="#">Forgot Password</a>
+                </div>
+            </div>*@
                             <div class="form-group">
                                 <button type="submit" class="btn form-control btn-primary rounded submit px-3">Giriş</button>
                             </div>
-                            
+                            <div>
+                                <td colspan="3"><span class="renk ">@ViewBag.Mesaj</span></td>
+                            </div>
                         }
                     </div>
                 </div>

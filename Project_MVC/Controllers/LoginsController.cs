@@ -1,5 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.Hashing;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,7 @@ namespace Project_MVC.Controllers
 
         AdminManager adm = new AdminManager(new EfAdminDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
+        Context context = new Context();
         // GET: Login
         [HttpGet]
         public ActionResult Index()
@@ -24,20 +28,40 @@ namespace Project_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(AdminForLoginDto admin)
+        public ActionResult Index(Manager manager, AdminForLoginDto admin)
         {
-            if ((adm.Login(admin)))
+            
+
+            if ((adm.Login(manager,admin)))
             {
-                FormsAuthentication.SetAuthCookie(admin.Email, false);
-                Session["EMail"] = admin.Email.ToString(); 
-                return RedirectToAction("Index", "AdminCategory");
+                
+                if (manager.Status==true)
+                {
+                    FormsAuthentication.SetAuthCookie(admin.Email, false);
+                    Session["EMail"] = admin.Email.ToString();
+                    Session["Password"] = admin.Password.ToString();
+                   
+                    return RedirectToAction("Index", "AdminCategory");
+                }
+                else
+                {
+                    ViewBag.Mesaj = "Yetkiniz Yoktur.";
+
+                }
             }
-            else
-            {
-                return View();
-            }
+                              
+
+                else
+                {
+                    ViewBag.Mesaj = "Böyle Bir kullanıcı yoktur.";
+                }
+
+
+            
+            return View();
 
         }
+
         [HttpGet]
         public ActionResult WriterLogin()
         {

@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mail;
+using System.Net;
 
 namespace Project_MVC.Controllers
 {
@@ -20,8 +22,7 @@ namespace Project_MVC.Controllers
         
         public ActionResult Inbox()
         {
-            
-
+           
             string p = (string)Session["EMail"];            
             var value = mm.GetListInbox(p);
             var count = mm.GetListStatusFalse().Count();
@@ -45,15 +46,49 @@ namespace Project_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult NewMessage(Message message)
+        public ActionResult NewMessage(Message message,AdminForLoginDto adminForLoginDto, HttpPostedFileBase myFiles)
         {
             //message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             //mm.MessageAdd(message);
             //return View("Sendbox");
             string p = (string)Session["EMail"];
+            string c = (string)Session["Password"];
             message.SenderMail = p;
+            adminForLoginDto.Password = c;
             message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            mm.MessageAdd(message);
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.To.Add(message.ReceiverMail);//alıcı
+            mailMessage.From = new MailAddress(message.SenderMail);//gönderen
+            mailMessage.Subject = "Konu:  " + message.Subject;
+            mailMessage.Body = "<br> Mesaj İçeriği: " + message.MessageContent;
+            mailMessage.IsBodyHtml = true;
+
+            if (myFiles != null)
+            {
+                mailMessage.Attachments.Add(new Attachment(myFiles.InputStream, myFiles.FileName));
+            }
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Credentials = new NetworkCredential(message.SenderMail, adminForLoginDto.Password);//gönderen mail , şifre
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            try
+            {
+
+                smtp.Send(mailMessage);
+                TempData["Message"] = "Mail iletildi";
+
+
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Message"] = "Mail Gönderilemedi Hata Nedeni: " + ex.Message;
+            }
+
+            
+            mm.MessageAdd(message,adminForLoginDto);
             return View();
         }
         public ActionResult DeleteMessage(int id)
@@ -86,5 +121,6 @@ namespace Project_MVC.Controllers
             return View(messages);
 
         }
+       
     }
 }

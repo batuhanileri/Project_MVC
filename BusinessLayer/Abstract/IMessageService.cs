@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BusinessLayer.Abstract
 {
@@ -16,10 +17,12 @@ namespace BusinessLayer.Abstract
         List<Message> GetListSendInbox(string p);
         List<Message> GetList();
 
-        void MessageAdd(Message message);
+        void MessageAdd(Message message,AdminForLoginDto adminForLoginDto);
         Message GetById(int id);
         void MessageDelete(Message message);
         void MessageUpdate(Message message);
         List<Message> GetFalseMessage();
+        Message GetByMail(String  mail);
+
     }
 }

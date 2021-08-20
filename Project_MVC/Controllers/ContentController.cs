@@ -21,5 +21,10 @@ namespace Project_MVC.Controllers
             var contentvalues = cm.GetListByHeadingId(id);
             return View(contentvalues);
         }
+        public ActionResult GetAllContent(string p)
+        {
+            var values = cm.GetList(p);
+            return View(values);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace BusinessLayer.Abstract
     public interface IAdminService
     {
         List<Manager> GetList();
-        bool Login(AdminForLoginDto admin);
+        bool Login(Manager manager ,AdminForLoginDto admin);
         void AdminAdd(AdminForRegisterDto adminregister, string password);
         Manager GetById(int id);
         Manager GetByName(String name);
@@ -16,5 +16,9 @@ namespace BusinessLayer.Abstract
         void ChangeRole(int id, String role);
         void AdminDelete(Manager admin);
         void AdminUpdate(Manager admin);
+        void AdminDeleteStatus(Manager manager);
+
+
+
     }
 }

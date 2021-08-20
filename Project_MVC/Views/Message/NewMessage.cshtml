@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
                 <div class="col-sm-6">
                     <h1>Yeni Mesaj Oluşturma Sayfası</h1>
                 </div>
-                
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -42,7 +43,7 @@
                 @Html.Partial("ContactPartialView", @Model)
                 <!-- /.col -->
                 <div class="col-md-9">
-                    @using (Html.BeginForm("NewMessage", "Message", FormMethod.Post))
+                    @using (Html.BeginForm("NewMessage", "Message", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         <div class="card card-primary card-outline">
                             <div class="card-header">
@@ -50,6 +51,8 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <div class="alert alert-info">@TempData["Message"]</div>
+
                                 <div class="form-group">
                                     @Html.Label("Alıcı Adı")
                                     @Html.TextBoxFor(x => x.ReceiverMail, new { @class = "form-control" })
@@ -70,7 +73,7 @@
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
                                         <i class="fas fa-paperclip"></i> Dosya Ekle
-                                        <input type="file" name="attachment">
+                                        <input type="file" name="myFiles" value="" />
                                     </div>
                                     <p class="help-block">Max. 32MB</p>
                                 </div>
@@ -86,8 +89,8 @@
                             <!-- /.card-footer -->
                         </div>
                     }
-                        <!-- /.card -->
-                    </div>
+                    <!-- /.card -->
+                </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->

@@ -16,7 +16,7 @@ namespace Project_MVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Logins", action = "WriterLogin", id = UrlParameter.Optional }
+                defaults: new { controller = "Logins", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

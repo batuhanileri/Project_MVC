@@ -52,19 +52,19 @@ namespace Project_MVC.Controllers
 
             return View(Values);
         }
-        [HttpGet]
-        public ActionResult NewMessage()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult NewMessage(Message message)
-        {
-            string p = (string)Session["Writermail"];
-            message.SenderMail = p;
-            message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            mm.MessageAdd(message);
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult NewMessage()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult NewMessage(Message message)
+        //{
+        //    string p = (string)Session["Writermail"];
+        //    message.SenderMail = p;
+        //    message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+        //    mm.MessageAdd(message);
+        //    return View();
+        //}
     }
 }

@@ -7,21 +7,24 @@
 
 @using (Html.BeginForm("NewAdmin", "Authorizations", FormMethod.Post))
 {
-    <div class="form-group">
-        @Html.Label("Admin Adı")
-        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
-        <br /><br />
-        @Html.Label("Admin Rolü")
-        @Html.DropDownListFor(x => x.Id, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+<div class="form-group">
+    @*<tr>
+        <td colspan="3" class="renk ">@ViewBag.Mesaj</td>
+    </tr>*@
+    <br />
+    @Html.Label("Admin Adı")
+    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+    <br /><br />
+    @*@Html.Label("Admin Rolü")
+    @Html.DropDownListFor(x => x.AdminRole, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })*@
 
-        <br /><br />
-        @Html.Label("Admin Mail")
-        @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
-        <br /><br />
-        @Html.Label("Admin Password")
-        @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
-        <br />
-        <br /><br />
-        <button id="btn3" class="btn btn-danger">Kaydet</button>
-    </div>
+    @Html.Label("Admin Mail")
+    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+    <br /><br />
+    @Html.Label("Admin Password")
+    @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+    <br />
+    <br /><br />
+    <button id="btn3" class="btn btn-danger">Kaydet</button>
+</div>
 }

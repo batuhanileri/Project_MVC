@@ -34,6 +34,8 @@ namespace BusinessLayer.Concrete
                 UserName = adminregister.UserName,
                 Status = true,
                 Mail = adminregister.Mail
+                
+                
 
             };
             _adminDal.Add(admin);
@@ -60,6 +62,7 @@ namespace BusinessLayer.Concrete
             //    Status = true
 
             //};
+
             _adminDal.Update(admin);
         }
 
@@ -70,16 +73,17 @@ namespace BusinessLayer.Concrete
         public bool Login(AdminForLoginDto admin)
         {
             var userToCheck = GetByMail(admin.Email);
-            if (userToCheck == null)
-            {
-                return false;
-            }
-            if (!HashingHelper.VerifyPasswordHash(admin.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt) &&
-                !HashingHelper.VerifyMailHash(admin.Email, userToCheck.AdminUserNameHash, userToCheck.AdminUserNameSalt))
-            {
-                return false;
-            }
-            return true;
+            
+                if (userToCheck == null)
+                {
+                    return false;
+                }
+                if (!HashingHelper.VerifyPasswordHash(admin.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt) &&
+                    !HashingHelper.VerifyMailHash(admin.Email, userToCheck.AdminUserNameHash, userToCheck.AdminUserNameSalt))
+                {             
+                    return false;
+                }
+             return true;
         }
         public bool Register(AdminForRegisterDto adminregister, string password)
         {
@@ -103,7 +107,7 @@ namespace BusinessLayer.Concrete
         }
         public List<Manager> GetList()
         {
-            return _adminDal.GetAll(x => x.Status == true);
+            return _adminDal.GetAll();
         }
 
         public Manager GetByName(String name)
@@ -119,6 +123,13 @@ namespace BusinessLayer.Concrete
             var value = _adminDal.Get(x => x.Id == id);
             value.Role = role;
             _adminDal.Update(value);
+        }
+
+        public void AdminDeleteStatus(Manager manager)
+        {
+            manager.Status = false;
+            _adminDal.Update(manager);
+
         }
     }
 }

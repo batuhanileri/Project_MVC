@@ -24,6 +24,9 @@
     @Html.Label("Kategori Adı")
     @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.vlc1, new { @class = "form-control" })
     <br />
+    @Html.Label("Durum")
+    @Html.TextBoxFor(x => x.HeadingStatus ,new { @class = "form-control" })
+    <br />
     <button class="btn btn-info">Güncelle</button>
 </div>
 }

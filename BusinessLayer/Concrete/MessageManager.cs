@@ -5,8 +5,11 @@ using EntityLayer.EDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BusinessLayer.Concrete
 {
@@ -47,8 +50,9 @@ namespace BusinessLayer.Concrete
         }
 
 
-        public void MessageAdd(Message message)
+        public void MessageAdd(Message message,AdminForLoginDto adminForLoginDto)
         {
+
             message.MessagesStatus = true;
             _messageDal.Add(message);
 
@@ -78,6 +82,11 @@ namespace BusinessLayer.Concrete
             return _messageDal.GetAll(x=>x.MessagesStatus==false);
 
 
+        }
+
+        public Message GetByMail(String mail)
+        {
+            return _messageDal.Get(x => x.SenderMail == mail);
         }
     }
 }
