@@ -35,19 +35,19 @@ namespace Project_MVC.Controllers
             if ((adm.Login(manager,admin)))
             {
                 
-                if (manager.Status==true)
-                {
+                //if (manager.Status==true)
+                //{
                     FormsAuthentication.SetAuthCookie(admin.Email, false);
                     Session["EMail"] = admin.Email.ToString();
                     Session["Password"] = admin.Password.ToString();
                    
                     return RedirectToAction("Index", "AdminCategory");
-                }
-                else
-                {
-                    ViewBag.Mesaj = "Yetkiniz Yoktur.";
+                //}
+                //else
+                //{
+                //    ViewBag.Mesaj = "Yetkiniz Yoktur.";
 
-                }
+                //}
             }
                               
 

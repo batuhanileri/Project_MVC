@@ -24,6 +24,11 @@ namespace Project_MVC.Controllers
             var headingvalues = hm.GetList().ToPagedList(p, 5);
             return View(headingvalues);
         }
+        public ActionResult HeadingReport()
+        {
+            var headingValues = hm.GetList();
+            return View(headingValues);
+        }
         public ActionResult HeadingById(int id)
         {
             var headingvalues = hm.GetById(id);

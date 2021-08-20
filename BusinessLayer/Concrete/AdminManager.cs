@@ -70,7 +70,7 @@ namespace BusinessLayer.Concrete
         {
             return _adminDal.Get(x => x.Id == id);
         }
-        public bool Login(AdminForLoginDto admin)
+        public bool Login(Manager manager,AdminForLoginDto admin)
         {
             var userToCheck = GetByMail(admin.Email);
             
