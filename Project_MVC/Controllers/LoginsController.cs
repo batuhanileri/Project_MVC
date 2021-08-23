@@ -21,6 +21,7 @@ namespace Project_MVC.Controllers
         AdminManager adm = new AdminManager(new EfAdminDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
         Context context = new Context();
+
         // GET: Login
         [HttpGet]
         public ActionResult Index()
@@ -30,35 +31,36 @@ namespace Project_MVC.Controllers
         [HttpPost]
         public ActionResult Index(Manager manager, AdminForLoginDto admin)
         {
-            
+            var userToCheck = adm.GetByMail(admin.Email);
 
-            if ((adm.Login(manager,admin)))
+            if ((adm.Login(manager, admin)))
             {
-                
-                //if (manager.Status==true)
-                //{
+
+                if (userToCheck.Status == true)
+                {
                     FormsAuthentication.SetAuthCookie(admin.Email, false);
                     Session["EMail"] = admin.Email.ToString();
                     Session["Password"] = admin.Password.ToString();
-                   
-                    return RedirectToAction("Index", "AdminCategory");
-                //}
-                //else
-                //{
-                //    ViewBag.Mesaj = "Yetkiniz Yoktur.";
 
-                //}
-            }
-                              
+                    return RedirectToAction("Index", "AdminCategory");
+                }
+                else
+                {
+                    ViewBag.Mesaj = "Yetkiniz Yoktur.";
+
+
+
+                }
+            }                 
 
                 else
                 {
-                    ViewBag.Mesaj = "Böyle Bir kullanıcı yoktur.";
+                    ViewBag.Mesaj = "Kullanıcı Adı Yada Şifre Yanlıştır.";
                 }
 
 
             
-            return View();
+                return View();
 
         }
 
@@ -68,18 +70,48 @@ namespace Project_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult WriterLogin(WriterForLoginDto writer)
+        public ActionResult WriterLogin(Writer w,WriterForLoginDto writerForLoginDto)
         {
-            if ((wm.Login(writer)))
+            var userToCheck = wm.GetByMail(writerForLoginDto.Email);
+
+            if ((wm.Login(w, writerForLoginDto)))
             {
-                FormsAuthentication.SetAuthCookie(writer.Email, false);
-                Session["Writermail"] = writer.Email.ToString();
-                return RedirectToAction("MyContent", "WriterPanelContent");
+
+                if (userToCheck.WriterStatus == true)
+                {
+                    FormsAuthentication.SetAuthCookie(writerForLoginDto.Email, false);
+                    Session["Writermail"] = writerForLoginDto.Email.ToString();
+                    Session["Password"] = writerForLoginDto.Password.ToString();
+
+                    return RedirectToAction("MyContent", "WriterPanelContent");
+                }
+                else
+                {
+                    ViewBag.Mesaj = "Hesabınız Askıya Alınmış";
+
+                }
             }
+
             else
             {
-                return View();
+                ViewBag.Mesaj = "Kullanıcı Adı Yada Şifre Yanlıştır.";
             }
+
+
+
+            return View();
+
+
+            //if ((wm.Login(writer)))
+            //{
+            //    FormsAuthentication.SetAuthCookie(writer.Email, false);
+            //    Session["Writermail"] = writer.Email.ToString();
+            //    return RedirectToAction("MyContent", "WriterPanelContent");
+            //}
+            //else
+            //{
+            //    return View();
+            //}
         }
 
         public ActionResult LogOut()

@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.FluentValidation;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using EntityLayer.EDto;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace Project_MVC.Controllers
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterDal());
+        Context context = new Context();
+
         public ActionResult Index()
         {
 
@@ -27,24 +31,39 @@ namespace Project_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddWriter(Writer writer)
+        public ActionResult AddWriter(WriterForRegisterDto writerForRegisterDto,string mail)
         {
-            WriterValidator writerValidator = new WriterValidator();
-            ValidationResult results = writerValidator.Validate(writer);
-            if (results.IsValid)
-            {
-                wm.WriterAdd(writer);
-                return RedirectToAction("Index");
+            Session["EMail"] = writerForRegisterDto.Mail.ToString();
+            
 
+            if (context.Writers.Where(x => x.WriterMail == mail).Any())
+            {
+                ViewBag.Mesaj = "Bu mail adresiyle daha önce kayıt yapıldı.";
+                return View("AddWriter");
             }
             else
             {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
+
+                wm.WriterAdd(writerForRegisterDto, writerForRegisterDto.Password);
+
+                return RedirectToAction("Index");
             }
-            return View();
+            //WriterValidator writerValidator = new WriterValidator();
+            //ValidationResult results = writerValidator.Validate(writer);
+            //if (results.IsValid)
+            //{
+            //    wm.WriterAdd(writer);
+            //    return RedirectToAction("Index");
+
+            //}
+            //else
+            //{
+            //    foreach (var item in results.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            //return View();
         }
         [HttpGet]
         public ActionResult EditWriter(int id)

@@ -80,10 +80,12 @@ namespace BusinessLayer.Concrete
                 }
                 if (!HashingHelper.VerifyPasswordHash(admin.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt) &&
                     !HashingHelper.VerifyMailHash(admin.Email, userToCheck.AdminUserNameHash, userToCheck.AdminUserNameSalt))
-                {             
+                {
                     return false;
                 }
-             return true;
+
+            return true;
+            //return userToCheck.Status;
         }
         public bool Register(AdminForRegisterDto adminregister, string password)
         {

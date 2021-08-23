@@ -11,12 +11,12 @@ namespace BusinessLayer.Abstract
     public interface IWriterService
     {
         List<Writer> GetList();
-        void WriterAdd(Writer writer);
+        void WriterAdd(WriterForRegisterDto writer, string password);
         Writer GetById(int id);
         void WriterDelete(Writer writer);
         void WriterUpdate(Writer writer);
-        bool Login(WriterForLoginDto writer);
-        void Register(WriterForRegisterDto writer, string password);
+        bool Login(Writer w,WriterForLoginDto writer);
+        bool Register(WriterForRegisterDto writer, string password);
         Writer GetByMail(string mail);
     }
 }

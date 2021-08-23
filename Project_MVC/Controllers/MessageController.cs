@@ -58,7 +58,7 @@ namespace Project_MVC.Controllers
             message.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             MailMessage mailMessage = new MailMessage();
             mailMessage.To.Add(message.ReceiverMail);//alıcı
-            mailMessage.From = new MailAddress(message.SenderMail);//gönderen
+            mailMessage.From = new MailAddress(message.SenderMail,"TICKET DESTEK TALEBİ");//gönderen
             mailMessage.Subject = "Konu:  " + message.Subject;
             mailMessage.Body = "<br> Mesaj İçeriği: " + message.MessageContent;
             mailMessage.IsBodyHtml = true;
@@ -69,10 +69,13 @@ namespace Project_MVC.Controllers
             }
 
             SmtpClient smtp = new SmtpClient();
-            smtp.Credentials = new NetworkCredential(message.SenderMail, adminForLoginDto.Password);//gönderen mail , şifre
+            NetworkCredential Credentials = new NetworkCredential("bertictest@gmail.com", "147896325a.s");//gönderen mail , şifre
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = Credentials;
             smtp.Port = 587;
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
+          
             try
             {
 
@@ -88,7 +91,7 @@ namespace Project_MVC.Controllers
             }
 
             
-            mm.MessageAdd(message,adminForLoginDto);
+            mm.MessageAddAdmin(message,adminForLoginDto);
             return View();
         }
         public ActionResult DeleteMessage(int id)

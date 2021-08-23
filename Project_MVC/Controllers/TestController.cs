@@ -17,5 +17,10 @@ namespace Project_MVC.Controllers
         {
             return View();
         }
+        public ActionResult SweerAlert()
+        {
+            return View();
+
+        }
     }
 }

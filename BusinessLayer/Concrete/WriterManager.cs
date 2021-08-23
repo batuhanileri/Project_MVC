@@ -19,9 +19,27 @@ namespace BusinessLayer.Concrete
         {
             _writerDal = writerDal;
         }
-        public void WriterAdd(Writer writer)
+        public void WriterAdd(WriterForRegisterDto writer,string password)
         {
-            _writerDal.Add(writer);
+            byte[] passwordHash, passwordSalt, mailHash, mailSalt;
+            HashingHelper.CreateMailHash(writer.Mail, out mailHash, out mailSalt);
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var newwriter = new Writer
+            {
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                WriterImage = writer.WriterImage,
+                WriterName = writer.WriterName,
+                WriterSurname = writer.WriterSurname,
+                WriterMail = writer.Mail,
+                WriterStatus = true,
+                WriterAbout = writer.WriterAbout,
+                WriterTitle = writer.WriterTitle,
+
+            };
+            _writerDal.Add(newwriter);
+
+            _writerDal.Add(newwriter);
 
         }
 
@@ -49,7 +67,7 @@ namespace BusinessLayer.Concrete
 
         }
 
-        public bool Login(WriterForLoginDto writer)
+        public bool Login(Writer w,WriterForLoginDto writer)
         {
             var userToCheck = _writerDal.Get(x => x.WriterMail == writer.Email);
             if (userToCheck == null)
@@ -62,7 +80,7 @@ namespace BusinessLayer.Concrete
             }
             return true;
         }
-        public void Register(WriterForRegisterDto writer, string password)
+        public bool Register(WriterForRegisterDto writer, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -80,6 +98,8 @@ namespace BusinessLayer.Concrete
 
             };
             _writerDal.Add(newwriter);
+            return true;
+
         }
 
         public Writer GetByMail(string mail)

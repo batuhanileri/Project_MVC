@@ -50,7 +50,14 @@ namespace BusinessLayer.Concrete
         }
 
 
-        public void MessageAdd(Message message,AdminForLoginDto adminForLoginDto)
+        public void MessageAddAdmin(Message message,AdminForLoginDto adminForLoginDto)
+        {
+
+            message.MessagesStatus = true;
+            _messageDal.Add(message);
+
+        }
+        public void MessageAddWriter(Message message, WriterForLoginDto writerForLogin)
         {
 
             message.MessagesStatus = true;

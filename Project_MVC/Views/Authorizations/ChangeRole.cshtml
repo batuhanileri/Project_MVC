@@ -5,16 +5,21 @@
 }
 @using (Html.BeginForm("ChangeRole", "Authorizations", FormMethod.Post))
 {
-    <div class="form-group">
+<div class="form-group">
 
-        <br /><br />
-        @Html.Label("Admin Rolü")
-        @Html.HiddenFor(x => x.Id, new { @class = "form-control" })
-         
-        @Html.TextBoxFor(x => x.Role, new { @class = "form-control" })
+    <br /><br />
+    @Html.HiddenFor(x => x.Id, new { @class = "form-control" })
 
-
-        <br />
-        <button class="btn btn-success">Rol Değiştir</button>
-    </div>
+    @Html.Label("Admin Ad")
+    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Admin Mail")
+    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+    <br />
+    @*@Html.Label("Admin Rolü")    
+    @Html.DropDownListFor(x => x.Role, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    <br />*@
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+</div>
 }

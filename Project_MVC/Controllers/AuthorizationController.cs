@@ -34,11 +34,13 @@ namespace Project_MVC.Controllers
                 List<SelectListItem> valueRole = (from x in admRole.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.RoleName,
-                                                      Value = x.Id.ToString()
+                                                      Text = x.RoleName.ToString(),
+                                                      Value = x.RoleName
                                                   }).ToList();
                 ViewBag.dgr1 = valueRole;
+                
                 return View();
+              
             }
             [HttpPost]
             public ActionResult NewAdmin(string mail,AdminForRegisterDto c)
@@ -57,7 +59,7 @@ namespace Project_MVC.Controllers
                                   
                     adm.AdminAdd(c, c.Password);                  
                                    
-                return View(c);
+                return RedirectToAction("Index");
                 }
             }
         //private void SendActivationEmail(Manager manager, AdminForRegisterDto c)
@@ -93,8 +95,8 @@ namespace Project_MVC.Controllers
                 List<SelectListItem> valueRole = (from x in admRole.GetList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = x.RoleName,
-                                                      Value = x.Id.ToString()
+                                                      Text = x.RoleName.ToString(),
+                                                      Value = x.RoleName
                                                   }).ToList();
                 ViewBag.dgr1 = valueRole;
                 var value = adm.GetById(id);
@@ -107,12 +109,25 @@ namespace Project_MVC.Controllers
                 adm.ChangeRole(manager.Id, manager.Role);
                 return RedirectToAction("Index");
             }
-            public ActionResult DeleteAdmin(int id)
+            public ActionResult FalseStatusAdmin(int id)
             {
                 var value = adm.GetById(id);
                 value.Status = false;
                 adm.AdminUpdate(value);              
                 return RedirectToAction("Index");
+        }
+        public ActionResult TrueStatusAdmin(int id)
+        {
+            var value = adm.GetById(id);
+            value.Status = true;
+            adm.AdminUpdate(value);
+            return RedirectToAction("Index");
+        }
+        public ActionResult DeleteAdmin(int id)
+        {
+            var value = adm.GetById(id);        
+            adm.AdminDelete(value);
+            return RedirectToAction("Index");
         }
     }
 

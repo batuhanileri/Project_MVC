@@ -17,7 +17,8 @@ namespace BusinessLayer.Abstract
         List<Message> GetListSendInbox(string p);
         List<Message> GetList();
 
-        void MessageAdd(Message message,AdminForLoginDto adminForLoginDto);
+        void MessageAddAdmin(Message message,AdminForLoginDto adminForLoginDto);
+        void MessageAddWriter(Message message,WriterForLoginDto writerForLoginDto);
         Message GetById(int id);
         void MessageDelete(Message message);
         void MessageUpdate(Message message);

@@ -8,7 +8,7 @@ namespace BusinessLayer.Abstract
     public interface IAdminService
     {
         List<Manager> GetList();
-        bool Login(Manager manager ,AdminForLoginDto admin);
+        Boolean Login(Manager manager ,AdminForLoginDto admin);
         void AdminAdd(AdminForRegisterDto adminregister, string password);
         Manager GetById(int id);
         Manager GetByName(String name);

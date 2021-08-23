@@ -12,27 +12,29 @@
     <tr>
         <th>#</th>
         <th>Kullanıcı Mail</th>
-        <th>Yetki</th>
+        @*<th>Yetki</th>*@
         <th>Durum</th>
         <th>Pasif Yap</th>
-        <th>Yetkisini Değiştir</th>
+        <th>Aktif Yap</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
 
 
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <th>@item.Id</th>
-            <td>@item.Mail</td>
-            <td>@item.Role</td>
-            <td>@item.Status</td>
-            <td><a href="/Authorizations/DeleteAdmin/@item.Id" class="btn btn-danger">Pasif Yap</a></td>
-            <td><a href="/Authorizations/ChangeRole/@item.Id" class="btn btn-warning">Yetkisini Değiştir</a></td>
-        </tr>
+<tr>
+    <th>@item.Id</th>
+    <td>@item.Mail</td>
+    @*<td>@item.Role</td>*@
+    <td>@item.Status</td>
+    <td><a href="/Authorizations/FalseStatusAdmin/@item.Id" class="btn btn-primary">Pasif Yap</a></td>
+    <td><a href="/Authorizations/TrueStatusAdmin/@item.Id" class="btn btn-success">Aktif Yap </a></td>
+    <td><a href="/Authorizations/DeleteAdmin/@item.Id" class="btn btn-danger">Sil</a></td>
+    <td><a href="/Authorizations/ChangeRole/@item.Id" class="btn btn-warning">Güncelle</a></td>
+</tr>
     }
 </table>
-
-
 
 <br />
 
